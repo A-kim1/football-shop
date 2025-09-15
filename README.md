@@ -76,3 +76,62 @@ Ada banyak hal yang membuat Django ini menjadi framework yang digunakan utk matk
 6. Apakah ada feedback untuk asisten dosen tutorial 1 yang telah kamu kerjakan sebelumnya?
 
 JWB: tidak ada sepertinya
+
+---------------------------------------------------------------------------------------------------------
+TUGAS 3
+
+1. Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
+
+JWB:
+Menurut aku data delivery dalam mengembangkan sebuah platform itu sangat penting karena platform itu terdiri dari banyak bagian (frontend, backend, database, ...), oleh karena itu data delivery sangat membantu dalam hal mentransfer data dengan aman, cepat, dan konsisten. Contoh dari data delivery yang aku sudah pakai adalah: HTML, JSON, XML
+
+2. Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+
+JWB:
+Menurutku JSON itu lebih baik dari pada XML karena beberapa hal, yaitu:
+    1. JSON lebih aman dibandingkan dengan XML.
+    2. JSON memiliki ukuran file yang lebih kecil dan transmisi data yang lebih cepat.
+    3. JSON bersifat sederhana dan lebih fleksibel.
+    4. Json itu parsingnya lebih cepat dibanding sama XML.
+    5. ...
+
+Dari beberapa hal yang aku sebutkan diatas sudah dapat dilihat bahwa JSON memiliki lebih banyak keunggulannya jika dibandingkan dengan XML, oleh karena itu JSON lebih populer dibandingkan dengan XML.
+
+sumber: https://aws.amazon.com/id/compare/the-difference-between-json-xml/
+
+3.  Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
+
+JWB:
+Method is_valid() itu intinya ada untuk ngecek apakah data yang diisi user di form sudah benar semua sesuai aturan (seperti data terisi/tidak ada data yg kosong, sesuai tipe datanya, panjangnya juga sesuai, dll). Nahh utk penerapan method ini itu bisa dilihat di dalam views.py yang ada di dir main pada fungsi create_product.
+
+4. Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh
+
+JWB:
+csrf_token itu adalah token keamanan untuk mencegah CSRF (Cross Site Request Forgery) attack.
+Kalo kita gk ada token itu, maka penyerang/hacker bisa menipu seorang user yg udh pernah login/masuk ke web aku dan ngirim2 request yg berbahaya (contoh: ngapus data, ganti password, transfer uang, dll).
+
+Jadi intinya itu dengan adanya csrf_token ini, Django bisa mastiin request yg dikirim itu benar2 berasal dari form yang sah di aplikasi/web yg aku buat, bukan dari luar.
+
+5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+
+JWB:
+    1. Pertama2 aku buat base template nya dulu yg digunain untuk dasar dari template3 lainnya, caranya aku buat folder templates di root folder dan isi dengan base.html yg isinya boilerplate html doang yg ditambah dengan template tags “block” yg nanti bisa aku masuk2in html buat app2 nya.
+    
+    2. Stlh itu aku setting2in template2 nya dan ubah2 dikit template main.html di app nya.
+
+    3. Lalu, aku mulai buat form nya, di bagian buat form ini aku bakal tambah2in dan ubah2 kode di file views.py , models.py , file2 .html yang ada di dalam app nya.
+
+    4. Selain langkah ketiga tadi aku juga sempet coba2 pake css di proyek aku ini, jadi langkah2 nya kurang lebih adalah: 
+        a. buat folder static di root proyek, trus di dlm nya ada folder css, lalu di dlm folder itu ada file2 css nya. 
+        b. stlh itu jgn lupa tambahin static file tadi ke settings.py nya. 
+        c. baru deh aku bisa buat2 css nya dan masuk2in css nya ke template2 nya yg bersesuaian.
+
+    5. Nahh setelah selesai buat form dan coba2 css aku sekarang bakal lanjut ke pebuatan xml dan json nya, di sini aku bakal tambah2in fungsi baru di views.py (yg ada di folder main) nya dan tambah2in kode di urls.py (yg ada di folder main) nya juga.
+
+    6. Setelah seelsai buat kode tambahan untuk xml dan json nya aku langsung push saja ke github dan pws nya.
+
+    CTT: nahh di PWS nya taunya css aku gk jalan, cuman di local doang jalannya, paling aku nunggu di tutorial nanti aja buat lanjut ke step css nya.
+ 
+6.  Apakah ada feedback untuk asdos di tutorial 2 yang sudah kalian kerjakan?
+
+JWB: sepertinya tidak ada

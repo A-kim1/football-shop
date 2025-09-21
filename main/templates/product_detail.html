@@ -9,6 +9,14 @@
 
 
 {% block content %}
+
+<!-- Tambahkan kode ini -->
+{% if product.user %}
+    <p>Seller: {{ product.user.username }}</p>
+{% else %}
+    <p>Seller: Anonymous</p>
+{% endif %}
+
 <div class="product-detail">
     <h1>{{ product.name }}</h1>
 
@@ -38,4 +46,5 @@
         <button>Kembali ke Shop</button>
     </a>
 </div>
+
 {% endblock content %}

@@ -1,50 +1,73 @@
 {% extends 'base.html' %}
-
-<!-- COba pake css -->
 {% load static %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/detail.css' %}">
 {% endblock %}
 
-
 {% block content %}
+<div class="bg-gray-50 w-full min-h-screen py-8">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
-<!-- Tambahkan kode ini -->
-{% if product.user %}
-    <p>Seller: {{ product.user.username }}</p>
-{% else %}
-    <p>Seller: Anonymous</p>
-{% endif %}
-
-<div class="product-detail">
-    <h1>{{ product.name }}</h1>
-
-    {% if product.thumbnail %}
-        <img src="{{ product.thumbnail }}" alt="{{ product.name }}">
-    {% endif %}
-
-    <p class="price">Rp {{ product.price }}</p>
-
-    <div class="meta">
-        <span class="tag">{{ product.category }}</span>
-        {% if product.is_featured %}
-            <span class="tag featured" >⭐ Featured</span>
-        {% endif %}
-        {% if product.is_product_hot %}
-            <span class="tag hot" >🔥 Hot</span>
-        {% endif %}
+    <!-- Back Navigation -->
+    <div class="mb-6">
+      <a href="{% url 'main:show_main' %}" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+        ← Back to Shop
+      </a>
     </div>
 
-    <p><b>Stok:</b> {{ product.stock }}</p>
-    <p><b>Views:</b> {{ product.product_views }}</p>
+    <!-- Product Card -->
+    <div class="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm">
+      
+      <!-- Header -->
+      <div class="p-6 sm:p-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ product.name }}</h1>
+        
+        <!-- Seller Info -->
+        {% if product.user %}
+          <p class="text-sm text-gray-500">Seller: {{ product.user.username }}</p>
+        {% else %}
+          <p class="text-sm text-gray-500">Seller: Anonymous</p>
+        {% endif %}
+      </div>
 
-    <hr>
-    <p>{{ product.description }}</p>
+      <!-- Thumbnail -->
+      {% if product.thumbnail %}
+        <div class="px-6 sm:px-8">
+          <img src="{{ product.thumbnail }}" alt="{{ product.name }}" class="w-full h-full object-cover rounded-lg">
+        </div>
+      {% endif %}
 
-    <a href="{% url 'main:show_main' %}">
-        <button>Kembali ke Shop</button>
-    </a>
+      <!-- Content -->
+      <div class="p-6 sm:p-8 space-y-4">
+        <!-- Price -->
+        <p class="text-2xl font-bold text-[#50589C]">Rp {{ product.price }}</p>
+
+        <!-- Meta info -->
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 text-xs font-medium rounded-md bg-[#50589C] text-white">{{ product.category }}</span>
+          {% if product.is_featured %}
+            <span class="px-3 py-1 text-xs font-medium rounded-md bg-[#6E8CFB] text-white">⭐ Featured</span>
+          {% endif %}
+          {% if product.is_product_hot %}
+            <span class="px-3 py-1 text-xs font-medium rounded-md bg-red-500 text-white">🔥 Hot</span>
+          {% endif %}
+        </div>
+
+        <p><b>Stock:</b> {{ product.stock }}</p>
+        <p><b>Views:</b> {{ product.product_views }}</p>
+
+        <hr class="my-4">
+        <p class="text-gray-700 leading-relaxed">{{ product.description }}</p>
+      </div>
+
+      <!-- Footer -->
+      <div class="p-6 sm:p-8 bg-gray-50 border-t border-gray-200">
+        <a href="{% url 'main:show_main' %}" class="inline-flex px-6 py-3 bg-[#50589C] text-white rounded-md font-medium hover:bg-[#3C467B] transition-colors">
+          Kembali ke Shop
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
-
 {% endblock content %}

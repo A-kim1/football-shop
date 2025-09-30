@@ -219,3 +219,66 @@ Kekurangan:
     6. Step selanjutnya adalah gunain data dari cookies, nahh di sini itu aku bakal pakai cookie utk tandain kapan aku terakhir kali login di web aku tersebut. Jadi krn aku bakal pakai cookie nya utk tandain kapan aku terakhir kali login, di sini aku bakal otak-atik kode fungis login_user nya di views.py. Stlh ini aku bisa lanjut gonta-ganti kode nya dikit lagi, seperti: tambahin context last login nya dan ubah fungsi logout nya utk apus cookie nya. 
 
     7. Terakhir aku bakal hubungin model product nya dengan user nya. Caranya itu: import User dari django, tambahin var baru user di dlm model product nya yg bakal hubungin user dengan product nya. Setelah itu tinggal ubah2 dikit kode di views.py nya dan beberpa file2 html nya dan selesai.
+
+-------------------------------------------------------------------------------------------------------------
+TUGAS 5
+
+1. Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+
+    Urutan prioritas CSS selector dari yang tertinggi ke terendah:
+    1) Inline styles = CSS yang langsung ditulis di dalam HTML nya menggunakan atribut style (style tag)
+    2) ID selector = Selector yang menggunakan #id --> itu syntax nya, pakai # kalau id
+    3) Classes selector = Selector yang menggunakan .class --> itu syntax nya, pakai . kalau class
+    tambahan yang setara dengan Class selector: Attribute selector dan Pseudo-class, contoh: [type="text"] dan :hover
+    4) Element selector = Selector yang menggunakan elemet nya --> contoh: h1,p,div,...
+    tambahan yang setara dengan Element selector: Pseudo-element, contoh: ::before
+
+2. Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design, serta jelaskan mengapa!
+
+Pertama-tama mungkin aku beri penjelasan tentang apa itu responsive design. Responsive design adalah pendekatan dalam web design agar tampilan website kita bisa menyesuaikan otomatis dengan ukuran layar (HP, tablet, laptop, desktop). Nahh ini itu merupakan salah satu konsep yang sangat penting di pengembangan aplikasi web karena dengan adanya responsive design ini konten di web kita akan tetap mudah dibaca, diakses, dan digunakan di semua perangkat.
+
+Contoh aplikasi yang sudah responsive:
+    1) Google --> Bisa kita lihat bahwa layout google menyesuaikan ukuran layar
+    2) Spotify --> Menu navigasi (navbar) nya berubah jadi hamburger menu kalo di mobile
+    3) ...
+
+Contoh aplikasi yang belum responsive:
+    Utk aplikasi yang belum responsive biasanya itu adalah
+    1) web pemerintah yang lama --> biasanya itu udh fixed gitu width nya yg bikin kita pengguna mobile harus zoom manual gitu
+    2) web legacy --> nahh kalo web legacy ini itu biasanya dibuatnya cuman utk 1 ukuran layar doang (biasanya buat desktop doang)
+
+3. Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+
+    1) Margin: intinya ini itu ruang luar antara elemen dan elemen lain (yg plg luar nya)
+    2) Border: garis/pembatas yang mengelilingi/membatasi margin dan padding
+    3) Padding: ruang antara konten elemen dengan border nya (di dlm border) (membatasi konten dan border)
+
+Dari lapisan terluar ke dalam: Margin, Border, Padding, Isi/Content
+
+Cara implementasinya mungkin bisa dilihat dari kode berikut --> ini itu kode di css nya:
+form {
+    margin: 20px;
+    padding: 25px;
+    border: 2px solid black; 
+}
+
+4. Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+
+Intinya itu flexbox dan grid merupakkan teknik layout yg digunakan di pembuatan aplikasi web.
+    1) Flexbox: layout nya itu satu dimensi doang, digunakan untuk mengatur elemen dlm satu baris ATAU kolom
+                - Kegunaan: ideal nya untuk komponen2 kecil, seperti: navigasi, card, form elements, dll
+
+    2) Grid: layout dua dimensi yang digunakan untuk mengatur elemen dalam baris DAN kolom
+            - Kegunaan: cocok utk layout halaman yang kompleks (main page nya), gallery, dashboard, dll
+
+5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+
+    1) Jadi pertama aku nambahin tailwind css pake script cdn di base html nya (intinya ini buat ntar pas bikin2 css nya dipakenya)
+
+    2) Selanjutnya, aku mencoba buat fitur Edit product gitu utk bisa edit2 product yg udh pernah dibikin sblmnya, disini normal aja cuman tambahin views.py pasang url yang pas, dan buat tambahin html nya agar munculin edit product nya.
+
+    3) Stlh itu, aku lanjut buat fitur hapus news nya. Langkah2 yg diubah sama seperti yg diatas intinya
+
+    4) Baru stlh itu aku bakal nambahin navbar (untuk navigasi fitur2nya gitu)
+
+    5) Dan terakhir ini aku bakal nambahin css nya, disini aku bakal buat file baru global.css yang ada di folder static/css yang ada di root. Nahh tapi aku bakal implement css nya itu kebanyakan dari html nya langsung, disini aku lumayan mirip dengan tutorial tapi ada beebrapa hal yang aku ganti seperti warna/color pallatenya dan di card (card_product.html) nya aku juga ubah template bentuknya agar lebih sesuai dengan tema shop nya

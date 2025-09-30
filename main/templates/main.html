@@ -1,73 +1,58 @@
- {% extends 'base.html' %}
- {% block content %}
-<h1>Football Shop</h1>
-<div class="header">
-    <h5>NPM:</h5>
-    <p>{{ npm }}</p>
+{% extends 'base.html' %}
+{% load static %}
 
-    <h5>Name:</h5>
-    <p>{{ name }}</p>
+{% block meta %}
+<title>Football Shop</title>
+{% endblock meta %}
 
-    <h5>Class:</h5>
-    <p>{{ class }}</p>
-</div>
+{% block content %}
+{% include 'navbar.html' %}
+<div class="bg-gray-50 w-full pt-16 min-h-screen">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-<a href="{% url 'main:create_product' %}">
-    <button>+ Add Product</button>
-</a>
-
-<a href="{% url 'main:logout' %}">
-  <button>Logout</button>
-</a>
-
-<h5>Sesi terakhir login: {{ last_login }}</h5>
-
-<hr>
-<!-- Tambahkan kode ini -->
-<a href="?filter=all">
-    <button type="button">All Product</button>
-</a>
-<a href="?filter=my">
-    <button type="button">My Product</button>
-</a> 
-
-{% if not product_list %}
-    <p>Belum ada produk di Football Shop.</p>
-{% else %}
-
-{% for product in product_list %}
-    <div class="product-card">
-        <h2>
-            <a href="{% url 'main:show_product' product.id %}">
-                {{ product.name }}
-            </a>
-        </h2>
-
-        <div class="meta">
-            <span class="tag">{{ product.category }}</span>
-            {% if product.is_featured %}
-                <span class="tag featured" >⭐ Featured</span>
-            {% endif %}
-            {% if product.is_product_hot %}
-                <span class="tag hot" >🔥 Hot</span>
-            {% endif %}
-        </div>
-
-        {% if product.thumbnail %}
-            <img src="{{ product.thumbnail }}" alt="thumbnail">
-        {% endif %}
-
-        <p class="price">Rp {{ product.price }}</p>
-        <p>Stok: {{ product.stock }}</p>
-        <p>Views: {{ product.product_views }}</p>
-
-        <p>{{ product.description|truncatewords:20 }}...</p>
-
-        <a href="{% url 'main:show_product' product.id %}">
-            <button>Read More</button>
-        </a>
+    <!-- Header Section -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-[#3C467B] mb-2 text-center">Football Shop</h1>
+      <p class="text-gray-600 text-center">Find your favorite football merchandise here</p>
+      <p class="text-gray-600 text-center">Let's Ball ⚽    </p>
     </div>
-{% endfor %}
 
-{% endif %}
+    <!-- Filter Section -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 bg-white rounded-lg border border-gray-200 p-4">
+      <div class="flex space-x-3 mb-4 sm:mb-0">
+        <a href="?" class="{% if request.GET.filter == 'all' or not request.GET.filter  %} bg-[#50589C] text-white{% else %}bg-white text-gray-700 border border-gray-300{% endif %} px-4 py-2 rounded-md font-medium transition-colors hover:bg-[#3C467B] hover:text-white">
+          All Products
+        </a>
+        <a href="?filter=my" class="{% if request.GET.filter == 'my' %} bg-[#50589C] text-white{% else %}bg-white text-gray-700 border border-gray-300{% endif %} px-4 py-2 rounded-md font-medium transition-colors hover:bg-[#3C467B] hover:text-white">
+          My Products
+        </a>
+      </div>
+      {% if user.is_authenticated %}
+        <div class="text-sm text-gray-500">
+          Last login: {{ last_login }}
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Product Grid -->
+    {% if not product_list %}
+      <div class="bg-white rounded-lg border border-gray-200 p-12 text-center">
+        <div class="w-32 h-32 mx-auto mb-4">
+          <img src="{% static 'image/no-products.png' %}" alt="No product available" class="w-full h-full object-contain">
+        </div>
+        <h3 class="text-lg font-medium text-[#3C467B] mb-2">No products found</h3>
+        <p class="text-gray-500 mb-6">Be the first to add football products to the shop.</p>
+        <a href="{% url 'main:create_product' %}" class="inline-flex items-center px-4 py-2 bg-[#50589C] text-white rounded-md hover:bg-[#3C467B] transition-colors">
+          + Add Product
+        </a>
+      </div>
+    {% else %}
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for product in product_list %}
+          {% include 'card_product.html' with product=product %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>
 {% endblock content %}

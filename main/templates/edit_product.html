@@ -1,10 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/create.css' %}">
-{% endblock %}
-
 {% block content %}
 <div class="bg-gray-50 w-full min-h-screen py-8">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -19,8 +15,8 @@
     <!-- Form Card -->
     <div class="bg-white rounded-lg border border-gray-200 p-6 sm:p-8 form-style shadow-sm">
       <div class="mb-8">
-        <h1 class="text-2xl font-bold text-gray-900 mb-2">Add Product</h1>
-        <p class="text-gray-600">Fill in product details to add it to the shop</p>
+        <h1 class="text-2xl font-bold text-gray-900 mb-2">Edit Product</h1>
+        <p class="text-gray-600">Update your product details</p>
       </div>
 
       <form method="POST" class="space-y-6">
@@ -31,13 +27,13 @@
             <td></td>
             <td colspan="2" class="pt-6">
               <div class="flex flex-col sm:flex-row gap-4">
-                <!-- Cancel button -->
+                <!-- Cancel -->
                 <a href="{% url 'main:show_main' %}" class="order-2 sm:order-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition-colors text-center">
                   Cancel
                 </a>
-                <!-- Submit button -->
+                <!-- Submit -->
                 <button type="submit" class="order-1 sm:order-2 flex-1 bg-[#50589C] text-white px-6 py-3 rounded-md font-medium hover:bg-[#3C467B] transition-colors">
-                  Add Product
+                  Update Product
                 </button>
               </div>
             </td>
@@ -47,4 +43,4 @@
     </div>
   </div>
 </div>
-{% endblock content %}
+{% endblock %}

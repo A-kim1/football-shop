@@ -38,7 +38,7 @@
         </div>
       {% endif %}
 
-      <form method="POST" action="" class="space-y-6">
+      <form id="loginForm" method="POST" class="space-y-6">
         {% csrf_token %}
         
         <div>
@@ -102,4 +102,48 @@
     </div>
   </div>
 </div>
+
+<script>
+const loginForm = document.getElementById('loginForm');
+
+loginForm.addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);
+  try {
+    const response = await fetch("{% url 'main:ajax_login' %}", {
+      method: "POST",
+      headers: { "X-CSRFToken": getCookie("csrftoken") },
+      body: formData,
+    });
+
+    const data = await response.json().catch(() => ({})); // biar aman kalau JSON gagal
+
+    if (response.ok && data.status === "success") {
+      showToast(`${data.message}`);
+      setTimeout(() => (window.location.href = "/"), 1000);
+    } else {
+      // Tangani error (baik 400, 403, 500, dsb)
+      showToast(`${data.message || "Invalid username or password."}`);
+    }
+  } catch (error) {
+    showToast("Server error. Please try again later.", true);
+  }
+});
+
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+      cookie = cookie.trim();
+      if (cookie.startsWith(name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+</script>
 {% endblock content %}

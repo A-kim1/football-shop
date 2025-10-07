@@ -24,9 +24,12 @@
             <div class="text-sm font-medium text-white">{{ name|default:user.username }}</div>
             <div class="text-xs text-gray-200">{{ npm|default:"Student" }} - {{ class|default:"Class" }}</div>
           </div>
-          <a href="{% url 'main:logout' %}" class="text-[#6E8CFB] hover:text-white font-medium transition-colors">
+          <button 
+            onclick="logoutUser()" 
+            class="text-[#6E8CFB] hover:text-white font-medium transition-colors"
+          >
             Logout
-          </a>
+          </button>
         {% else %}
           <a href="{% url 'main:login' %}" class="text-gray-200 hover:text-[#6E8CFB] font-medium transition-colors">
             Login
@@ -95,5 +98,43 @@
     btn.addEventListener("click", () => {
       menu.classList.toggle("hidden");
     });
+
+    async function logoutUser() {
+      try {
+        const response = await fetch("{% url 'main:ajax_logout' %}", {
+          method: "POST",
+          headers: { "X-CSRFToken": getCookie("csrftoken") },
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.status === "success") {
+          showToast("Goodbye!", data.message, "success");
+          setTimeout(() => {
+            window.location.href = "{% url 'main:login' %}";
+          }, 1500);
+        } else {
+          showToast("Logout Failed", data.message || "Something went wrong.", "error");
+        }
+      } catch (error) {
+        showToast("Network Error", "Unable to connect to server.", "error");
+      }
+    }
+
+    // Fungsi ambil CSRF token (kalau belum ada)
+    function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== "") {
+        const cookies = document.cookie.split(";");
+        for (let cookie of cookies) {
+          cookie = cookie.trim();
+          if (cookie.startsWith(name + "=")) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
   </script>
 </nav>

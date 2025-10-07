@@ -39,7 +39,7 @@
         </div>
       {% endif %}
 
-      <form method="POST" action="" class="space-y-5">
+      <form id="registerForm" method="POST" class="space-y-5">
         {% csrf_token %}
         
         <div>
@@ -115,4 +115,47 @@
     </div>
   </div>
 </div>
+
+<script>
+const registerForm = document.getElementById('registerForm');
+
+registerForm.addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);
+  try {
+    const response = await fetch("{% url 'main:ajax_register' %}", {
+      method: 'POST',
+      headers: { 'X-CSRFToken': getCookie('csrftoken') },
+      body: formData
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      showToast(`${data.message}`);
+      setTimeout(() => window.location.href = "{% url 'main:login' %}", 1200);
+    } else {
+      showToast(`${data.message}`);
+    }
+  } catch (error) {
+    showToast("Error connecting to server");
+  }
+});
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+</script>
 {% endblock content %}

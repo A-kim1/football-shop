@@ -1,6 +1,7 @@
 from django.forms import ModelForm
 from main.models import Product
 from django import forms
+from django.utils.html import strip_tags
 
 class ProductForm(ModelForm):
     class Meta:
@@ -16,3 +17,11 @@ class ProductForm(ModelForm):
             "category": forms.TextInput(attrs={"placeholder": "Kategori produk"}),
             "thumbnail": forms.URLInput(attrs={"placeholder": "Link gambar produk (https://...)"})
         }
+
+    def clean_name(self):
+        name = self.cleaned_data["name"]
+        return strip_tags(name)
+
+    def clean_description(self):
+        description = self.cleaned_data["description"]
+        return strip_tags(description)

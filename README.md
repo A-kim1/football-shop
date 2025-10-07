@@ -282,3 +282,48 @@ Intinya itu flexbox dan grid merupakkan teknik layout yg digunakan di pembuatan 
     4) Baru stlh itu aku bakal nambahin navbar (untuk navigasi fitur2nya gitu)
 
     5) Dan terakhir ini aku bakal nambahin css nya, disini aku bakal buat file baru global.css yang ada di folder static/css yang ada di root. Nahh tapi aku bakal implement css nya itu kebanyakan dari html nya langsung, disini aku lumayan mirip dengan tutorial tapi ada beebrapa hal yang aku ganti seperti warna/color pallatenya dan di card (card_product.html) nya aku juga ubah template bentuknya agar lebih sesuai dengan tema shop nya
+
+-------------------------------------------------------------------------------------------------------------
+TUGAS 6
+
+1.  Apa perbedaan antara synchronous request dan asynchronous request?
+
+JWB:
+Synchronous Request: Browser harus menunggu respon dari server nya dulu sebelum melanjutkan aktivitas lainnya. Halamannya biasanya akan reload sepenuhnya. Intinya: synchronous request itu berjalan secara berurutan.
+
+Asynchronous Request (AJAX): Browser dapat mengirim dan menerima data dari server tanpa me-refresh halaman secara keseluruhan. Prosesnya berlangsung di latar belakang. Intinya: asynchronous request itu memungkinkan beberapa tugas dieksekusi secara bersamaan atau sekaligus.
+
+2.  Bagaimana AJAX bekerja di Django (alur request–response)?
+
+JWB:
+1) Pengguna (user) melakukan aksi di halaman (misal: klik tombol). (client side)
+2) JavaScript membuat permintaan (request) menggunakan fetch() atau XMLHttpRequest. (client side)
+3) request nya itu dikirim ke server Django melalui URL tertentu (misal /api/data/). (URL routing)
+4) Server Django memproses data dan mengembalikan response (biasanya berupa JSON). (proses dan response)
+5) JavaScript menerima response tersebut dan memperbarui elemen HTML tanpa me-refresh halaman. (response di client)
+
+3. Apa keuntungan menggunakan AJAX dibandingkan render biasa di Django?
+
+JWB:
+kalau pake AJAX, keuntungan yang bisa kita dapat dibandingkan dengan render biasa:
+1) Tidak perlu reload/refresh seluruh halaman (ini karena AJAX itu menggunakan Asynchronous Request).
+2) Aplikasi terasa jadi lebih cepet dan interaktif (sama kyk diatas, karena AJAX itu menggunakan Asynchronous Request).
+3) Hanya mentransfer data yang diperlukan saja, bukan seluruh halamannya (Ini membuatnya jadi efisien)
+4) ...
+
+4.  Bagaimana cara memastikan keamanan saat menggunakan AJAX untuk fitur Login dan Register di Django?
+
+JWB:
+1) Pakai CSRF Token Django di setiap request AJAX.
+2) Pakai fungsi strip_tags() di Django untuk menghapus tag HTML berbahaya dari data yang diterima.
+3) Pakai DOMPurify di client side nya untuk pastiin konten HTML yang ditampilkan sudah disanitasi.
+4) Gunakan HTTPS agar data terenkripsi.
+5) ....
+
+5. Bagaimana AJAX mempengaruhi pengalaman pengguna (User Experience) pada website?
+
+JWB:
+1) Pengguna (user) mendapat respon instan tanpa harus refresh halaman nya, langsung dapet feedback instan. (ini itu karena AJAX menggunakan Asynchronous Request)
+2) Navigasi dan interaksi terasa lebih halus dan cepat.
+3) Mengurangi gangguan visual, meningkatkan kepuasan dan kenyamanan pengguna. (krn kita gk perlu gonta-ganti halaman lagi kalau mau ngelakuin sesuatu yg udh ada AJAX nya)
+4) ....
